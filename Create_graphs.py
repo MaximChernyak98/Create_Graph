@@ -9,15 +9,29 @@ from openpyxl.chart.axis import DateAxis
 graphs_book = load_workbook('C:\\Загрузки\14\\графики.xlsx')
 ws = graphs_book.active
 
-12
-class MGraph:
 
-    def __init__(self, x_indexes, y_indexes, ws):
+class MLine:
+
+    def __init__(self, x_column, y_column, name_column, ws):
+
+        # xvalues = Reference(ws, min_col=(type * 3 + 1), min_row=2, max_row=11)
+        # values = Reference(ws, min_col=(type * 3 + 2), min_row=1, max_row=11)
 
         self.chart = ScatterChart()
         self.chart.style = 13
         self.chart.x_axis.title = 'Уровень воздействия, ед.'
         self.chart.y_axis.title = str(ws.cell(row=1, column=y_index).value)
+
+
+# class MGraph:
+#
+#     def __init__(self, x_column, y_column, name_column, ws):
+#
+#
+#         self.chart = ScatterChart()
+#         self.chart.style = 13
+#         self.chart.x_axis.title = 'Уровень воздействия, ед.'
+#         self.chart.y_axis.title = str(ws.cell(row=1, column=y_index).value)
 
 
 
