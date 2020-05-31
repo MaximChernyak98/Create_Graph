@@ -20,6 +20,7 @@ class MLine:
     num_x = 2
     num_y = 2
     line_name = ''
+
     def __init__(self, x_column, y_column, worksheet):
         self.x_column = x_column
         self.y_column = y_column
@@ -34,7 +35,7 @@ class MLine:
         y_values = Reference(ws, min_col=self.y_column, min_row=2, max_row=self.num_y)
         graph = Series(y_values, x_values, title=self.line_name)
         graph.marker.symbol = 'triangle'
-        graph.marker.size = 5
+        graph.marker.size = 6
         return graph
 
 
