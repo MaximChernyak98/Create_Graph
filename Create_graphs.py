@@ -1,18 +1,14 @@
-import openpyxl
-import datetime
 from openpyxl import load_workbook
-from openpyxl.styles import Alignment
-from datetime import datetime, date, time
 from openpyxl.chart import (LineChart, Reference, ScatterChart, Series, )
-from openpyxl.chart.axis import DateAxis
+
 
 graphs_book = load_workbook('C:\\Work\\Python\\Create_graphs\\графики.xlsx')
 ws = graphs_book.active
 
 
 class MLine:
-    num_x = 2
-    num_y = 2
+    num_x = 4
+    num_y = 4
     line_name = ''
 
     def __init__(self, x_column, y_column, worksheet):
@@ -25,12 +21,20 @@ class MLine:
         self.line_name = str(worksheet.cell(row=1, column=self.x_column).value)
 
     def create_plot(self):
-        x_values = Reference(ws, min_col=self.x_column, min_row=2, max_row=self.num_x)
-        y_values = Reference(ws, min_col=self.y_column, min_row=2, max_row=self.num_y)
+        x_values = Reference(ws, min_col=self.x_column, min_row=3, max_row=self.num_x)
+        y_values = Reference(ws, min_col=self.y_column, min_row=3, max_row=self.num_y)
         graph = Series(y_values, x_values, title=self.line_name)
         graph.marker.symbol = 'triangle'
         graph.marker.size = 7
         return graph
+
+    def create_norms(self):
+        x_values = Reference(ws, min_col=self.x_column, min_row=2, max_row=3)
+        y_values = Reference(ws, min_col=self.y_column, min_row=2, max_row=3)
+        norms = Series(y_values, x_values, title=self.line_name)
+        norms.marker.symbol = 'triangle'
+        norms.marker.size = 0
+        return norms
 
 
 def create_graphs(start_index, step, num_of_param, num_samples, chart):
