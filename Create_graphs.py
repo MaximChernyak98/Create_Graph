@@ -9,12 +9,6 @@ from openpyxl.chart.axis import DateAxis
 graphs_book = load_workbook('C:\\Work\\Python\\Create_graphs\\графики.xlsx')
 ws = graphs_book.active
 
-chart = ScatterChart()
-chart.title = "Scatter Chart"
-chart.style = 13
-chart.x_axis.title = 'Уровень воздействия, ед.'
-chart.y_axis.title = '2'
-
 
 class MLine:
     num_x = 2
@@ -39,24 +33,35 @@ class MLine:
         return graph
 
 
-first_line = MLine(x_column=1, y_column=4, worksheet=ws)
-second_line = MLine(x_column=10, y_column=13, worksheet=ws)
-chart.series.append(first_line.create_plot())
-chart.series.append(second_line.create_plot())
-ws.add_chart(chart, "A21")
+def create_graphs(start_index, step, num_of_param, num_samples, chart):
+    current_offset = 0
+    for sample in range(num_samples):
+        line = MLine(x_column=(start_index+current_offset),
+                     y_column=(start_index+current_offset+num_of_param),
+                     worksheet=ws)
+        chart.series.append(line.create_plot())
+        current_offset += step
 
 
-# class MGraph:
-#
-#     def __init__(self, x_column, y_column, name_column, ws):
-#
-#
-#         self.chart = ScatterChart()
-#         self.chart.style = 13
-#         self.chart.x_axis.title = 'Уровень воздействия, ед.'
-#         self.chart.y_axis.title = str(ws.cell(row=1, column=y_index).value)
+def number_to_letter(n):
+    string = ""
+    while n > 0:
+        n, remainder = divmod(n - 1, 26)
+        string = chr(65 + remainder) + string
+    return string
 
 
+num_of_params = 6
+step = 9
+
+for params in range(1, (num_of_params+1)):
+    chart = ScatterChart()
+    chart.title = "Scatter Chart"
+    chart.style = 13
+    chart.x_axis.title = 'Уровень воздействия, ед.'
+    chart.y_axis.title = '2'
+    create_graphs(start_index=1, step=step, num_of_param=params, num_samples=10, chart=chart)
+    ws.add_chart(chart, f"{number_to_letter((params-1)*step+1)}21")
 
 
 
