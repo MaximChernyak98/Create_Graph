@@ -35,7 +35,7 @@ class MLine:
         y_values = Reference(ws, min_col=self.y_column, min_row=2, max_row=self.num_y)
         graph = Series(y_values, x_values, title=self.line_name)
         graph.marker.symbol = 'triangle'
-        graph.marker.size = 6
+        graph.marker.size = 7
         return graph
 
 
