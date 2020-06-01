@@ -2,7 +2,7 @@ from openpyxl import load_workbook
 from openpyxl.chart import (LineChart, Reference, ScatterChart, Series, )
 
 
-graphs_book = load_workbook('C:\\Work\\Python\\Create_graphs\\графики.xlsx')
+graphs_book = load_workbook('C:\\Work\\Python\\Create_graphs\\графики — копия.xlsx')
 ws = graphs_book.active
 
 
@@ -38,7 +38,7 @@ class MLine:
         y_values = Reference(ws, min_col=self.y_column, min_row=2, max_row=3)
         norms = Series(y_values, x_values)
         norms.marker.symbol = 'triangle'
-        norms.marker.size = 15
+        norms.marker.size = 3
         norms.marker.graphicalProperties.solidFill = "FFFFFF"
         return norms
 
@@ -51,8 +51,8 @@ style_dict = {0: ('triangle', "FFFFFF"),
               5: ('circle', None),
               6: ('diamond', "FFFFFF"),
               7: ('diamond', None),
-              8: ('dot', "FFFFFF"),
-              9: ('dot', None)
+              8: ('x', "FFFFFF"),
+              9: ('x', None)
               }
 
 
@@ -93,5 +93,5 @@ for params in range(1, (num_of_params+1)):
 
 
 
-graphs_book.save('C:\\Work\\Python\\Create_graphs\\графики.xlsx')
+graphs_book.save('C:\\Work\\Python\\Create_graphs\\графики — копия.xlsx')
 graphs_book.close()
